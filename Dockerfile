@@ -26,6 +26,8 @@ RUN \
 
 COPY . $APP_PATH
 
+RUN npm run build
+
 VOLUME $APP_PATH
 
 EXPOSE 3000

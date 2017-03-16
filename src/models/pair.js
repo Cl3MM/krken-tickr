@@ -24,5 +24,6 @@ export default class Pair {
       time: this.now
     }, response.data.result[this.name])
     mongo.save(data)
+    return Promise.resolve()
   }
 }

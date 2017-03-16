@@ -6,7 +6,7 @@ import { log } from './common'
 
 export default class Ticker {
   constructor () {
-    this.now = moment.utc().local().startOf('minute').toDate()//.format('YYYY-MM-DDTHH:mm:ss:SSSZ')
+    this.now = moment.utc().local().startOf('minute').toDate()
     this.pairs = []
     return this
   }
@@ -29,7 +29,9 @@ export default class Ticker {
 
   save () {
     console.log('[+] saving')
-    this.pairs.forEach(p => p.tick())
+    let promises = this.pairs.map(p => p.tick())
+    Promise.all(promises)
+      .then((data) => log('done'))
     return this
   }
 }

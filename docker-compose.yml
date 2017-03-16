@@ -1,0 +1,27 @@
+version: '2'
+services:
+  krken_api:
+    image: krken_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    command: crond -f -d 8
+    volumes:
+      - .:/data
+    links:
+      - krken_mg
+    depends_on:
+      - krken_mg
+    #restart: always
+
+  krken_mg:
+    container_name: krken_mg
+    image: mongo:latest
+    ports:
+      - "6863:27017"
+    volumes:
+      - ./db/mg:/data/db
+    restart: always
+

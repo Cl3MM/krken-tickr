@@ -1,0 +1,2 @@
+*/1 * * * * cd /data && npm run serve >> /var/log/cron.log 2>&1
+

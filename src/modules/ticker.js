@@ -31,7 +31,7 @@ export default class Ticker {
     console.log('[+] saving')
     let promises = this.pairs.map(p => p.tick())
     Promise.all(promises)
-      .then((data) => log('done'))
+      .then((data) => process.exit(0))
     return this
   }
 }

@@ -24,6 +24,8 @@ RUN \
       && rm -rf /var/cache/apk/* \
       && npm install -g node-inspector
 
+COPY . $APP_PATH
+
 VOLUME $APP_PATH
 
 EXPOSE 3000

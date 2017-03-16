@@ -5,16 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
     command: crond -f -d 8
-    volumes:
-      - .:/data
     links:
       - krken_mg
     depends_on:
       - krken_mg
-    #restart: always
+    restart: always
 
   krken_mg:
     container_name: krken_mg
@@ -22,6 +18,6 @@ services:
     ports:
       - "6863:27017"
     volumes:
-      - ./db/mg:/data/db
+      - /var/db/kraken/mg:/data/db
     restart: always
 

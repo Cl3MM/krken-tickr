@@ -17,19 +17,19 @@ export default class Ticker {
       this.pairs = Object.keys(response.data.result)
           .filter(k => !k.match(/CAD|JPY|USD|\.d/))
           .map(k => new Pair(response.data.result[k], this.now))
-      .catch((err) => {
-        error('unhandled exception, exiting')
-        error(err)
-        process.exit(1)
-      })
       return this
     })
   }
 
   run () {
     console.log('[+] running')
-    this.init().then(this.save.bind(this))
-    return this
+    return this.init()
+      .then(this.save.bind(this))
+      .catch((err) => {
+        error('unhandled exception, exiting')
+        error(err)
+        process.exit(1)
+      })
   }
 
   save () {

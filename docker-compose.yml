@@ -16,7 +16,7 @@ services:
     container_name: krken_mg
     image: mongo:latest
     ports:
-      - "127.0.0.1:6863:27017"
+      - "6863:27017"
     volumes:
       - /var/db/kraken/mg:/data/db
     restart: always

@@ -2,7 +2,9 @@ FROM node:6.10-alpine
 
 MAINTAINER Cl3MM
 
-ENV APP_PATH=/data
+ENV APP_PATH=/data \
+    STDOUT_LOC=/proc/1/fd/1 \
+    STDERR_LOC=/proc/1/fd/2
 
 WORKDIR $APP_PATH
 
@@ -22,13 +24,15 @@ RUN \
       && echo "Europe/Paris" >  /etc/timezone \
       && apk del tzdata \
       && rm -rf /var/cache/apk/* \
-      && npm install -g node-inspector
+      && npm install -g node-inspector \
+      && cd $APP_PATH
 
 COPY . $APP_PATH
 
-RUN npm run build
+RUN \
+      npm run build \
+      && env
 
-VOLUME $APP_PATH
 
 EXPOSE 3000
 

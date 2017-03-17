@@ -39,6 +39,8 @@ export const stringify = (obj, replacer, indent) => {
   return JSON.stringify(obj, printOnceReplacer, indent);
 }
 
+export const error = (m) => log(m, '!')
+
 export const log = (msg, type) => {
   type = type || '+'
   if (isObject(msg) || isArray(msg)) {

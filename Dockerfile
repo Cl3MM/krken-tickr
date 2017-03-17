@@ -30,8 +30,7 @@ RUN \
 COPY . $APP_PATH
 
 RUN \
-      npm run build \
-      && env
+      npm run build
 
 
 EXPOSE 3000

@@ -12,7 +12,6 @@ export default class Ticker {
   }
 
   init () {
-    console.log('[+] initializing')
     return axios.get(conf.route('AssetPairs')).then((response) => {
       this.pairs = Object.keys(response.data.result)
           .filter(k => !k.match(/CAD|JPY|USD|\.d/))
@@ -22,7 +21,6 @@ export default class Ticker {
   }
 
   run () {
-    console.log('[+] running')
     return this.init()
       .then(this.save.bind(this))
       .catch((err) => {
@@ -33,7 +31,7 @@ export default class Ticker {
   }
 
   save () {
-    console.log('[+] saving')
+    log('ticker is ticking...')
     let promises = this.pairs.map(p => p.tick())
     return Promise.all(promises)
       .then((data) => process.exit(0))

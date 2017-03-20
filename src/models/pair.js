@@ -42,7 +42,6 @@ export default class Pair {
     if (response.data.error[0]) {
       return Promise.reject({err: 'TICK_UPDATE_ERROR', msg: `response contains errors`, errors: response.data.error})
     }
-    log('saving '+ this.altname)
     let data = Object.assign({
       pair: this.altname,
       time: this.now

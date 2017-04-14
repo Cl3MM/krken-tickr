@@ -42,10 +42,11 @@ export default class Pair {
     if (response.data.error[0]) {
       return Promise.reject({err: 'TICK_UPDATE_ERROR', msg: `response contains errors`, errors: response.data.error})
     }
+    let val = response.data.result[this.name] || response.data.result[this.altname]
     let data = Object.assign({
       pair: this.altname,
       time: this.now
-    }, response.data.result[this.name])
+    }, val)
     mongo.save(data)
     return Promise.resolve()
   }
